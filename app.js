@@ -10,34 +10,38 @@ var pool = require('./models/bd');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var productosRouter = require('./routes/productos');
+
+
 
 var app = express();
 
-//  view engine setup
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // select
-// pool.query('SELECT * from empleados').then(function (results) {
-//   console.log(results)
-// });
+pool.query('SELECT * from empleados').then(function (results) {
+  console.log(results)
+});
 
 //insert
-//var obj={
-//   nombre:
-//   apellido:
-//   trabajo:
-//   edad:
-//   salario:
-//   mail:
-// }
 
-//pool.query('insert into empleados set ?', [obj]).then(function (results) {
-//console.log(results)
-//});
+var obj={
+  nombre: 'Lourdes',
+  apellido: 'Maniega',
+  trabajo: 'Dev',
+  edad: '15',
+  salario: '20000',
+  mail: 'lourdes@mail.com'
+} // JSON
+
+pool.query('insert into empleados set ?', [obj]).then(function (results) {
+console.log(results)
+});
 
 //update
-//var id=23;
+//var id=1;
 //var obj={
 //  nombre:
 //  apellido:
@@ -62,6 +66,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/productos', productosRouter);
 
 
 
